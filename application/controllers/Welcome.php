@@ -14,4 +14,8 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('proses_apriori');
 	}
+	public function hasil_apr()
+	{
+		$this->load->view('hasil_apriori');
+	}
 }

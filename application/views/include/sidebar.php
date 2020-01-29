@@ -8,7 +8,7 @@
                   <li><a><i class=" fa fa-cog"></i>Apriori <span class="fa fa-chevron-down"></a>
                     <ul class="nav child_menu">
                         <li><a href="<?php echo base_url('Welcome/pros_apr');?>">Proses Apriori</a></li>
-                        <li><a href="index2.html">Hasil Rules</a></li>
+                        <li><a href="<?php echo base_url('Welcome/hasil_apr');?>">Hasil Rules</a></li>
                     </ul>
                   </li>
                 </ul>
