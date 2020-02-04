@@ -105,18 +105,27 @@
 													<table id="datatable" class="table table-striped table-bordered" style="width:100%">
 														<thead>
 															<tr>
-																<th>Name</th>
-																<th>Position</th>
-																<th>Office</th>
-																<th>Age</th>
-																<th>Start date</th>
-																<th>Salary</th>
+																<th>NO. Invoice</th>
+																<th>Invoice Date</th>
 															</tr>
 														</thead>
-
+														
 
 														<tbody>
-
+														<?php foreach($data as $trans) {?>
+															<tr>
+																<td>
+																	<?php echo $trans['no_inv'];?>
+																</td>
+															
+																<td>
+																
+																		<?php echo $trans['tgl_trans'];?>
+																	
+																</td>
+															</tr>	
+															
+														<?php }?>
 														</tbody>
 													</table>
 												</div>
