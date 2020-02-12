@@ -72,60 +72,111 @@
 											<div class="col-sm-12">
 												<div class="card-box table-responsive">
 													<!-- Button trigger modal -->
-													<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+													<button type="button" class="btn btn-primary" data-toggle="modal"
+														data-target="#exampleModal">
 														Tambah Transaksi
 													</button>
 
 													<!-- Modal -->
-													<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-														aria-labelledby="exampleModalLabel" aria-hidden="true">
+													<div class="modal fade" id="exampleModal" tabindex="-1"
+														role="dialog" aria-labelledby="exampleModalLabel"
+														aria-hidden="true">
 														<div class="modal-dialog" role="document">
 															<div class="modal-content">
 																<div class="modal-header">
-																	<h5 class="modal-title" id="exampleModalLabel">Data Transaksi</h5>
-																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																	<h5 class="modal-title" id="exampleModalLabel">Data
+																		Transaksi</h5>
+																	<button type="button" class="close"
+																		data-dismiss="modal" aria-label="Close">
 																		<span aria-hidden="true">&times;</span>
 																	</button>
 																</div>
 																<div class="modal-body">
 																	<div class="form-group">
 																		<div class="form-line">
-																			<input type="file" name="thumbNews" id="thumbNews" onchange="readURL(this);"
-																				accept="image/*">
+																			
 																		</div>
 																	</div>
 																</div>
 																<div class="modal-footer">
-																	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-																	<button type="button" class="btn btn-primary">Save changes</button>
+																	<button type="button" class="btn btn-secondary"
+																		data-dismiss="modal">Close</button>
+																	<button type="button" class="btn btn-primary">Save
+																		changes</button>
 																</div>
 															</div>
 														</div>
 													</div>
-													<table id="datatable" class="table table-striped table-bordered" style="width:100%">
+
+													<!-- Modal detail -->
+													 <div class="modal fade" id="modaldetail">
+														<div class="modal-dialog" role="document">
+															<div class="modal-content">
+																<?php echo form_open('Welcome/detail_trans', array('class' => 'form- horizontal', 'autocomplete' => 'off') );?>
+																<div class="modal-header">
+																	<h5 class="modal-title">Detail Transaksi</h5>
+																	<button type="button" class="close"
+																		data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="modal-body">
+																	<div class="form-group">
+																		<div class="form-line">
+																			<?php 
+																				$data = array('type' =>'hidden', 'class' => 'form-control', 'name' => 'no_inv', 'id' => 'no_inv', 'value' => set_value('no_inv'), 'required'=>'true');
+																				echo form_input($data);
+																			?>
+																			<?php ?>
+																		</div>
+																	</div>
+																</div>
+																<div class="modal-footer">
+																	<button type="button" class="btn btn-secondary"
+																		data-dismiss="modal">Close</button>
+																</div>
+															</div>
+														</div>
+													</div> 
+													<table id="datatable-responsive"
+														class="table table-striped table-bordered dt-responsive nowrap"
+														cellspacing="0" width="100%">
 														<thead>
 															<tr>
-																<th>NO. Invoice</th>
-																<th>Invoice Date</th>
+																<th style="text-align : center; ">NO. Invoice</th>
+																<th style="text-align : center;">Invoice Date</th>
+																<th>Detail</th>
 															</tr>
 														</thead>
-														
 
 														<tbody>
-														<?php foreach($data as $trans) {?>
+															<?php foreach($trans as $data) {?>
 															<tr>
 																<td>
-																	<?php echo $trans['no_inv'];?>
+																	<?php echo $data['no_inv'];?>
 																</td>
-															
 																<td>
-																
-																		<?php echo $trans['tgl_trans'];?>
-																	
+																	<?php echo $data['tgl_trans'];?>
 																</td>
-															</tr>	
-															
-														<?php }?>
+																<td>
+																	<a href="" class="mb-2 btn btn-outline-danger mr-2">																
+																			<i class="fa fa-trash"
+																				aria-hidden="true"></i>																	
+																	</a>
+																	<a href="" class="mb-2 btn btn-outline-warning mr-2">
+																		
+																			<i class="fa fa-edit"
+																				aria-hidden="true"></i>
+																		
+																	</a>
+																	<a href="#modaldetail" data-toggle="modal" class="mb-2 btn btn-outline-primary mr-2">
+																	
+																		<i class="fa fa-info" aria-hidden="true"></i>
+																		
+																	</a>
+																</td>
+															</tr>
+															<?php }?>
 														</tbody>
 													</table>
 												</div>
@@ -141,10 +192,6 @@
 
 				</div>
 				<br />
-
-
-
-
 			</div>
 			<!-- /page content -->
 
@@ -161,6 +208,32 @@
 
 	<?php $this->load->view("include/js");?>
 
+	<!-- <script>
+		$(document).on('click', '.modaldetail', function () {
+			car myId = $(this).data('id');
+			$.ajax({
+				type: "GET",
+				url: "<?php echo base_url('Welcome/get')?>",
+				dataType: "JSON",
+				data: {
+					id: myId
+				},
+				success: function (data) {
+					$.each(data, function (no_inv, kode_item, nama_item, unit) {
+						$('#modaldetail').modal('show');
+						$('[name="no_inv"]').val(data.no_inv);
+						$('[name="kode_item"]').val(data.kode_item);
+						$('[name="nama_item"]').val(data.nama_item);
+						$('[name="unit"]').val(data.unit);
+
+					});
+				}
+			});
+			return false;
+
+		});
+
+	</script> -->
 </body>
 
 </html>
