@@ -55,3 +55,4 @@
     <script src="<?php echo base_url("");?>asset/vendors/jszip/dist/jszip.min.js"></script>
     <script src="<?php echo base_url("");?>asset/vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="<?php echo base_url("");?>asset/vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>

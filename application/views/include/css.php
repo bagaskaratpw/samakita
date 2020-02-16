@@ -16,3 +16,4 @@
 
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url ("");?>asset/build/css/custom.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />

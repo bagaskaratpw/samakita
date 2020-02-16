@@ -16,12 +16,20 @@ class Welcome extends CI_Controller {
 	public function dat_trans()
 	{
 		$dataquery = $this->db->get('transaksi')->result_array();
-	
+		$data1 = $this->data_model->tampil_kode();
+		$data_checkout = $this->db->get('transaksi_temp')->result_array();
 		$data = array(
 			'trans' => $dataquery,
+			'kode' => $data1,
+			'data_checkout' => $data_checkout,
 		);
 		
 		$this->load->view('data_transaksi',$data);
+	}
+	public function ajax_kode($kode)
+	{
+		$data = $this->data_model->ajax_kode($kode);
+		echo json_encode($data);
 	}
 	
 	// function get()
@@ -58,6 +66,7 @@ class Welcome extends CI_Controller {
 		$data = $this->db->insert('barang',$data);
 		redirect('Welcome/daftar_barang');
 	}
+	
 	public function hapus_barang ($unique)
 	{
 	    $unique = array('id_barang' => $unique);
@@ -82,7 +91,7 @@ class Welcome extends CI_Controller {
 			$unique=$this->input->post('editid');	
 			
 			$this->data_model->edit_barang($unique);	
-		
+	
 			redirect('Welcome/daftar_barang');
 		}
 	

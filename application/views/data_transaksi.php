@@ -14,6 +14,7 @@
 </head>
 
 <body class="nav-md">
+
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
@@ -48,150 +49,264 @@
 
 			<!-- page content -->
 			<div class="right_col" role="main">
-				<!-- top tiles -->
-				<div class="row" style="display: inline-block;">
-
-				</div>
-				<!-- /top tiles -->
-
-				<div class="row">
-					<div class="col-md-12 col-sm-12 ">
-						<div class="dashboard_graph">
-							<div class="col-md-12 col-sm-12 ">
-								<div class="x_panel">
-									<div class="x_title">
-										<h2>Data Transaksi <small>Pelanggan</small></h2>
-										<ul class="nav navbar-right panel_toolbox">
-											<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-											</li>
-										</ul>
-										<div class="clearfix"></div>
-									</div>
-									<div class="x_content">
-										<div class="row">
-											<div class="col-sm-12">
-												<div class="card-box table-responsive">
-													<!-- Button trigger modal -->
-													<button type="button" class="btn btn-primary" data-toggle="modal"
-														data-target="#exampleModal">
-														Tambah Transaksi
-													</button>
-
-													<!-- Modal -->
-													<div class="modal fade" id="exampleModal" tabindex="-1"
-														role="dialog" aria-labelledby="exampleModalLabel"
-														aria-hidden="true">
-														<div class="modal-dialog" role="document">
-															<div class="modal-content">
-																<div class="modal-header">
-																	<h5 class="modal-title" id="exampleModalLabel">Data
-																		Transaksi</h5>
-																	<button type="button" class="close"
-																		data-dismiss="modal" aria-label="Close">
-																		<span aria-hidden="true">&times;</span>
-																	</button>
-																</div>
-																<div class="modal-body">
-																	<div class="form-group">
-																		<div class="form-line">
-																			
-																		</div>
-																	</div>
-																</div>
-																<div class="modal-footer">
-																	<button type="button" class="btn btn-secondary"
-																		data-dismiss="modal">Close</button>
-																	<button type="button" class="btn btn-primary">Save
-																		changes</button>
-																</div>
-															</div>
-														</div>
+				<div class="">
+					<div class="page-title">
+						<div class="title_left">
+							<h3>Daftar Transaksi</h3>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="x_panel">
+								<div class="x_title">
+									<h2>Input Transaksi</h2>
+									<ul class="nav navbar-right panel_toolbox">
+										<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+										</li>
+									</ul>
+									<div class="clearfix"></div>
+								</div>
+								<div class="x_content">
+									<br />
+									<div class="form-group">
+										<div class="form-line">
+										<!-- <form action="" enctype="multipart/form-data"></form> -->
+											<?php echo form_open_multipart('transaksi/tambah_checkout'); ?>
+											<div class="form-row">
+												<!-- <div class="form-group col-md-6">
+													<label for="inputid"> No. Invoice</label>
+													<input type="text" class="form-control" id="id_barang"
+														name="id_barang">
+												</div> -->
+												<div class="form-group col-md-12">
+													<label for="inputunit">Invoice Date</label>
+													<input class="form-control" class='date' type="date" name="date" value="<?php echo date('Y-m-d'); ?>" required>
+												</div>
+											</div>
+											<div class="form-group">
+												<label>Barang</label>
+												<select name="barang" id="barang" class="form-control select2" required>
+													<option value="">Pilih Barang</option>
+													<?php
+													foreach($kode as $kode)
+													{
+													echo '<option value="'.$kode['id_barang'].'">'.$kode['id_barang']." - ".$kode['nama_barang'].'</option>';
+													}
+													?>
+												</select>
+											</div>
+											<input type="hidden" id="nama_barang" name="nama_barang">
+											<div class="form-group">
+												<div class="row">
+													<div class="col-md-4">
+														<label>Unit</label>
+														<input type="type" class="form-control" id="unit" name="unit" readonly>
 													</div>
+													<div class="col-md-8">
+														<label>Harga</label>
+														<input type="text" class="form-control" id="harga" name="harga" readonly>
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label>Banyak</label>
+												<input type="number" name="quantity" id="" value="1" class="quantity form-control" required>
+											</div>
+											<button type="submit" class="btn btn-primary">ADD</button>
+											<?php echo form_close(); ?>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-8">
+							<div class="x_panel">
+								<div class="x_title">
+									<h2>Daftar Belanja</h2>
+									<ul class="nav navbar-right panel_toolbox">
+										<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+										</li>
+									</ul>
+									<div class="clearfix"></div>
+								</div>
+								<div class="x_content">
+									<br />
+									<form class="form-label-left input_mask" action="<?php echo base_url('transaksi/tambah_transaksi') ?>" method="POST">
 
-													<!-- Modal detail -->
-													 <div class="modal fade" id="modaldetail">
-														<div class="modal-dialog" role="document">
-															<div class="modal-content">
-																<?php echo form_open('Welcome/detail_trans', array('class' => 'form- horizontal', 'autocomplete' => 'off') );?>
-																<div class="modal-header">
-																	<h5 class="modal-title">Detail Transaksi</h5>
-																	<button type="button" class="close"
-																		data-dismiss="modal" aria-label="Close">
-																		<span aria-hidden="true">&times;</span>
-																	</button>
-																</div>
-																<div class="modal-body">
-																	<div class="form-group">
-																		<div class="form-line">
-																			<?php 
-																				$data = array('type' =>'hidden', 'class' => 'form-control', 'name' => 'no_inv', 'id' => 'no_inv', 'value' => set_value('no_inv'), 'required'=>'true');
-																				echo form_input($data);
-																			?>
-																			<?php ?>
-																		</div>
+										<table class="table table-bordered">
+											<thead>
+												<tr>
+												<th style="align-center">Id Barang</th>
+												<th>Nama Barang</th>
+												<th>unit</th>
+												<th>Harga</th>
+												<th>Banyak</th>
+												<th>Action</th>
+												</tr>
+											</thead>
+											<tbody>
+												<?php foreach($data_checkout as $c): ?>
+												<input type="hidden" name="c_tgl_trans" value="<?php echo $c['tgl_trans']; ?>">
+												<tr>
+													<td>
+														<?php echo $c['kode_item']; ?>
+														<input type="hidden" name="c_kode_item[]" value="<?php echo $c['kode_item']; ?>">
+													</td>
+													<td>
+														<?php echo $c['nama_barang']; ?>
+														<input type="hidden" name="c_nama_barang[]" value="<?php echo $c['nama_barang']; ?>">
+													</td>
+													<td>
+														<?php echo $c['unit']; ?>
+														<input type="hidden" name="c_unit[]" value="<?php echo $c['unit']; ?>">
+													</td>
+													<td>
+														Rp. <?php echo number_format($c['amount'],2,',','.'); ?>
+														<input type="hidden" name="c_amount[]" value="<?php echo $c['amount']; ?>">
+													</td>
+													<td>
+														<?php echo $c['quantity']; ?>
+														<input type="hidden" name="c_quantity[]" value="<?php echo $c['quantity']; ?>">
+													</td>
+													<td>
+													-
+													</td>
+												</tr>
+												<?php endforeach; ?>
+											</tbody>
+										</table>
+										<button type="submit" class="btn btn-primary">Checkout</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /ROW -->
+
+					<div class="row">
+						<div class="col-md-12 col-sm-12 ">
+							<div class="dashboard_graph">
+								<div class="col-md-12 col-sm-12 ">
+									<div class="x_panel">
+										<div class="x_title">
+											<h2>Data Transaksi <small>Pelanggan</small></h2>
+											<ul class="nav navbar-right panel_toolbox">
+												<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+												</li>
+											</ul>
+											<div class="clearfix"></div>
+										</div>
+										<div class="x_content">
+											<div class="row">
+												<div class="col-sm-12">
+													<div class="card-box table-responsive">
+														<!-- Button trigger modal -->
+
+														<!-- Modal detail -->
+														<div class="modal fade" id="modaldetail">
+															<div class="modal-dialog modal-lg" role="document">
+																<div class="modal-content">
+																	<?php echo form_open('Welcome/detail_trans', array('class' => 'form- horizontal', 'autocomplete' => 'off') );?>
+																	<div class="modal-header">
+																		<h5 class="modal-title">Detail Transaksi
+																		</h5>
+																		<button type="button" class="close"
+																			data-dismiss="modal" aria-label="Close">
+																			<span aria-hidden="true">&times;</span>
+																		</button>
 																	</div>
-																</div>
-																<div class="modal-footer">
-																	<button type="button" class="btn btn-secondary"
-																		data-dismiss="modal">Close</button>
+																	<div class="modal-body">
+																		<table class="table table-striped table-bordered" style="width:100%">
+																			<thead>
+																				<tr>
+																					<th>#</th>
+																					<th>No Invocie</th>
+																					<th>Kode Item</th>
+																					<th>Nama Barang</th>
+																					<th>Unit</th>
+																					<th>Harga</th>
+																					<th>Jumlah Beli</th>
+																					<th>Total Harga</th>
+																				</tr>
+																			</thead>
+																			<tbody id="table_detail">
+																				<tr>
+																					<td></td>
+																				</tr>
+																			</tbody>
+																		</table>
+																	</div>
+																	<div class="modal-footer">
+																		<button type="button" class="btn btn-secondary"
+																			data-dismiss="modal">Close</button>
+																	</div>
 																</div>
 															</div>
 														</div>
-													</div> 
-													<table id="datatable-responsive"
-														class="table table-striped table-bordered dt-responsive nowrap"
-														cellspacing="0" width="100%">
-														<thead>
-															<tr>
-																<th style="text-align : center; ">NO. Invoice</th>
-																<th style="text-align : center;">Invoice Date</th>
-																<th>Detail</th>
-															</tr>
-														</thead>
 
-														<tbody>
-															<?php foreach($trans as $data) {?>
-															<tr>
-																<td>
-																	<?php echo $data['no_inv'];?>
-																</td>
-																<td>
-																	<?php echo $data['tgl_trans'];?>
-																</td>
-																<td>
-																	<a href="" class="mb-2 btn btn-outline-danger mr-2">																
+														<table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+															<thead>
+																<tr>
+																	<th style="text-align : center; ">NO. Invoice
+																	</th>
+																	<th style="text-align : center;">Invoice Date
+																	</th>
+																	<th>Detail</th>
+																</tr>
+															</thead>
+
+															<tbody>
+																<?php foreach($trans as $data) {?>
+																<tr>
+																	<td>
+																		<?php echo $data['no_inv'];?>
+																	</td>
+																	<td>
+																		<?php echo $data['tgl_trans'];?>
+																	</td>
+																	<td>
+																		<a href=""
+																			class="mb-2 btn btn-outline-danger mr-2">
 																			<i class="fa fa-trash"
-																				aria-hidden="true"></i>																	
-																	</a>
-																	<a href="" class="mb-2 btn btn-outline-warning mr-2">
-																		
+																				aria-hidden="true"></i>
+																		</a>
+																		<a href=""
+																			class="mb-2 btn btn-outline-warning mr-2">
+
 																			<i class="fa fa-edit"
 																				aria-hidden="true"></i>
-																		
-																	</a>
-																	<a href="#modaldetail" data-toggle="modal" class="mb-2 btn btn-outline-primary mr-2">
-																	
-																		<i class="fa fa-info" aria-hidden="true"></i>
-																		
-																	</a>
-																</td>
-															</tr>
-															<?php }?>
-														</tbody>
-													</table>
+
+																		</a>
+																		<button type="button" class="btn btn-outline-primary mr-2 mb-2 btn_detail" id="btn_detail" data-id="<?php echo $data['no_inv']; ?>">
+																			<i class="fa fa-info" aria-hidden="true"></i>
+																		</button>
+																		<!-- <a href="#modaldetail" data-toggle="modal"
+																			class="mb-2 btn btn-outline-primary mr-2">
+
+																			<i class="fa fa-info"
+																				aria-hidden="true"></i>
+
+																		</a> -->
+																	</td>
+																</tr>
+																<?php }?>
+															</tbody>
+														</table>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
 
-							<div class="clearfix"></div>
+								<div class="clearfix"></div>
+							</div>
 						</div>
 					</div>
+					<br />
 
 				</div>
-				<br />
 			</div>
 			<!-- /page content -->
 
@@ -203,37 +318,63 @@
 				<div class="clearfix"></div>
 			</footer>
 			<!-- /footer content -->
+
+
 		</div>
+		<!-- main container -->
 	</div>
+	<!-- container -->
+
 
 	<?php $this->load->view("include/js");?>
 
-	<!-- <script>
-		$(document).on('click', '.modaldetail', function () {
-			car myId = $(this).data('id');
-			$.ajax({
-				type: "GET",
-				url: "<?php echo base_url('Welcome/get')?>",
-				dataType: "JSON",
-				data: {
-					id: myId
-				},
-				success: function (data) {
-					$.each(data, function (no_inv, kode_item, nama_item, unit) {
-						$('#modaldetail').modal('show');
-						$('[name="no_inv"]').val(data.no_inv);
-						$('[name="kode_item"]').val(data.kode_item);
-						$('[name="nama_item"]').val(data.nama_item);
-						$('[name="unit"]').val(data.unit);
-
-					});
-				}
-			});
-			return false;
-
+	<script>
+	$(function(){
+		$(".select2").select2();
+		// $("#datepicker").datepicker({
+		// 	autoclose: true,
+		// });
+	});
+	$("#barang").change(function(){
+		$.getJSON('<?php echo base_url("Welcome/ajax_kode/"); ?>'+$(this).val())
+			.then(res => {
+			$("#nama_barang").val(res.nama_barang);
+			$("#harga").val(res.harga);
+			$("#unit").val(res.unit);
 		});
+	});
+	$('#datatable-responsive').on('click', '#btn_detail', function(){
+		var no_inv = $(this).data('id');
+		$.ajax({
+			url: '../transaksi/coba',
+			type: 'GET',
+			data: {no_inv:no_inv},
+			dataType: 'JSON',
+			success: (res) => {
+				console.log(res);
+				$('#modaldetail').modal('show');
+				var html = '';
+				var i, no=1;
+				for(i=0; i<res.length; i++){
+					html += '<tr>'+
+							'<td>'+no+++'</td>'+
+							'<td>'+res[i].no_inv+'</td>'+
+							'<td>'+res[i].kode_item+'</td>'+
+							'<td>'+res[i].nama_barang+'</td>'+
+							'<td>'+res[i].unit+'</td>'+
+							'<td>'+res[i].harga+'</td>'+
+							'<td>'+res[i].quantity+'</td>'+
+							'<td>'+res[i].amount+'</td>'+
+							'</tr>';
+				}
+				$('#table_detail').html(html);
+			},
+			error: (err) => {
 
-	</script> -->
+			}
+		});
+	});;
+	</script> 
 </body>
 
 </html>

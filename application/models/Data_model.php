@@ -59,4 +59,14 @@ class Data_model extends CI_Model
         $this->db->where('id_barang', $unique);
         return $this->db->get()->row_array();
     }
+
+    public function tampil_kode()
+    {
+        return $this->db->get('barang')->result_array();
+    }
+    public function ajax_kode($where)
+    {
+        $this->db->where('id_barang', $where);
+        return $this->db->get('barang')->row();
+    }
 }
